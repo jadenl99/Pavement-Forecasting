@@ -1,3 +1,4 @@
 /src/__pycache__
 /.vscode
 /.conda
+/src/custom_libraries/__pycache__
