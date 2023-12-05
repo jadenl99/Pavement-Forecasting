@@ -276,3 +276,52 @@ def has_deteriorated(df: pd.DataFrame, curr_year: str, end_year: str):
             res[i] = 0
     return res
 
+
+
+def categorize_proximity(df: pd.DataFrame, curr_year: str):
+   
+    slab_states = df[curr_year].to_numpy()
+
+
+    # define the mappings
+    slab_state_to_weight = {
+        'NC': 0,
+        'T1': 1,
+        'T2': 2,
+        'L1': 1,
+        'L2': 2,
+        'CC': 2,
+        'SS': 2,
+        'R': 2,
+        'B': 0
+    }
+    # pad the ends
+    n = len(slab_states)
+    slab_states = np.pad(slab_states, (1, 1), mode='reflect')
+
+    # map slab state to numerical weight
+    vfunc = np.vectorize(lambda state: slab_state_to_weight[state])
+    slab_states = vfunc(slab_states)
+
+    res_average_slab_state = np.zeros(n)
+
+    
+
+    for i in range(1, n + 1):
+        state_set = {slab_states[i - 1], slab_states[i + 1]}
+        if state_set == {0}:
+            res_average_slab_state[i - 1] = 0
+        elif state_set == {0, 1}:
+            res_average_slab_state[i - 1] = 1
+        elif state_set == {1}:
+            res_average_slab_state[i - 1] = 2
+        elif state_set == {0, 2}:
+            res_average_slab_state[i - 1] = 3
+        elif state_set == {1, 2}:
+            res_average_slab_state[i - 1] = 4
+        elif state_set == {2}:
+            res_average_slab_state[i - 1] = 5
+        else:
+            res_average_slab_state[i - 1] = 6
+    return res_average_slab_state
+
