@@ -1,7 +1,7 @@
 # Jupyter Notebooks
 The exploratory_analysis folder contains all the work I have done in the first part of the semester. 
-Surveying trends in the data is intended to get familiar with it and to generate ideas about topics that 
-can be explored more in-depth for the second part of the Fall 2023 semester.
+The work done here is primarily a surface-level view of the trends in the data to lay the groundwork
+for more in-depth analysis in the second half of the semester. 
 
 The geographic_mapping folder contains the short stint of our team trying to map every slab to its 
 approximate location on the map.
